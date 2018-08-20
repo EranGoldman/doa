@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dead or alive</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<style>
+.top15
+{margin-top:15px;}
+</style>
+</head>
+
+<body>
+
+    <div class="container">
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+		<a class="navbar-brand" href="/">Dead or alive</a>
+	  <!-- Links -->
+    <ul class="navbar-nav float-lg-right">
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/EranGoldman/doa/wiki" target="_blank">Wiki</a>
+    </li>
+      <li class="nav-item float-lg-right">
+        <a class="nav-link" href="/user/logout">Log out</a>
+        </li>
+  </ul>
+
+	</nav>
+
+	<div id="content" class="top15">{% block content %}{% endblock %}</div>
+        <footer class="footer top15">
+            <p>&copy; Public</p>
+            </footer>
+
+        </div>
+
+</body>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+{% if notLoggedin %}
+<!-- not loggedin -->
+{% else %}
+<script src="/static/js/js.js"></script>
+{% endif %}
+</html>
