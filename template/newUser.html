@@ -3,13 +3,17 @@
 {% if error is defined %}
     <div class="alert alert-warning"> {{ error }} </div>
 {% endif %}
-<form action="/user" method="POST" class="top15">
-  <div class="form-group">
-      <label for="email">Email address:</label>
-          <input class="form-control" type='email' name='email' id='email'>
-    </div>
+<form action="" method="POST" class="top15">
+
+    {% if email is defined %}
+      <div class="form-group" hidden>
+        <label for="email">Email address:</label>
+        <input class="form-control" type='email' name='email' id='email' value='{{ email }}'>
+      </div>
+    {% endif %}
+
       <div class="form-group">
-          <label for="pwd">Password:</label>
+          <label for="pwd">Choose your password:</label>
       <input type="password" class="form-control" id="password" name="password">
         </div>
     <button type="submit" class="btn btn-primary">Submit</button>

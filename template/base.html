@@ -22,9 +22,14 @@
       <li class="nav-item">
         <a class="nav-link" href="https://github.com/EranGoldman/doa/wiki" target="_blank">Wiki</a>
     </li>
+    {% if current_user.role == 'admin' %}
       <li class="nav-item float-lg-right">
-        <a class="nav-link" href="/user/logout">Log out</a>
-        </li>
+        <a class="nav-link" href="/user/management">users</a>
+      </li>
+    {% endif %}
+    <li class="nav-item float-lg-right">
+      <a class="nav-link" href="/user/logout">Log out</a>
+    </li>
   </ul>
 
 	</nav>
@@ -44,4 +49,5 @@
 {% else %}
 <script src="/static/js/js.js"></script>
 {% endif %}
+{% block js %}{% endblock %}
 </html>

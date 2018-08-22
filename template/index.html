@@ -7,5 +7,45 @@
   <ul id="Domains">
   </ul>
 </div>
-
+<div class="col-lg-6 top15" id="frmDomain">
+ <h4>Add domain</h4>
+ <form class="top15">
+       <div class="form-group">
+         <label for="notify_email">Email to notify:</label>
+         <input class="form-control" type='email' name='notify_email' id='notify_email'>
+       </div>
+       <div class="form-group">
+           <label for="domain">Domain:</label>
+           <input type="text" class="form-control" id="domain" name="domain">
+       </div>
+     <button id="btnAddDomain" type="submit" class="btn btn-primary">Submit</button>
+ </form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+  $( document ).ready(function() {
+    $("#btnAddDomain").click(function(event){
+      event.preventDefault()
+      var notify_email = $("#notify_email").val()
+      var domain = $("#domain").val()
+      $.post('domain',
+            {"notify_email":notify_email,"domain":domain},
+            function(data){
+              if (data.error != ""){
+                $("#frmDomain").append('<div id="error" class="alert alert-warning top15">'+data.error+'</div>')
+                $(".alert").delay(2500).fadeOut(1600)
+              }else{
+                $("#frmDomain").append('<div id="error" class="alert alert-success top15">Done</div>')
+                $(".alert").delay(2500).fadeOut(1600)
+              }
+            })
+    })
+    $.get('domain',function(data){
+      $.each(data.domains, function (index, value) {
+        $("#Domains").append("<li>"+value+"</li>")
+      });
+    })
+  })
+</script>
 {% endblock %}
