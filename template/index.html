@@ -16,6 +16,14 @@
        </div>
        <div class="form-group">
            <label for="domain">Domain:</label>
+           <small> Add the script to your website:</small>
+           <code>var elemDiv = document.createElement('div');
+elemDiv.style.cssText = 'position:absolute;width:0%;height:0%;display: none;';
+elemDiv.setAttribute("id","LiveOrNot");
+elemDiv.setAttribute("data-secret",btoa(window.location.href).replace("=","");
+elemDiv.innerHTML = (new Date).getTime();
+document.body.appendChild(elemDiv);
+</code>
            <input type="text" class="form-control" id="domain" name="domain">
        </div>
      <button id="btnAddDomain" type="submit" class="btn btn-primary">Submit</button>
@@ -37,6 +45,14 @@
                 $(".alert").delay(2500).fadeOut(1600)
               }else{
                 $("#frmDomain").append('<div id="error" class="alert alert-success top15">Done</div>')
+                <!-- var li = "<li>"
+                li += domain
+                li += "<br><small>Paste this code in your page - </small><br><code>"
+                li += '&lt;div style="position: absolute; width: 0%; height: 0%; display: none;" id="LiveOrNot" data-secret="'
+                li += btoa(domain).replace("=","")
+                li += '"&gt;&lt;/div&gt;'
+                li += "</code></li>"
+                $("#Domains").append(li) -->
                 $(".alert").delay(2500).fadeOut(1600)
               }
             })
@@ -45,11 +61,12 @@
       $.each(data.domains, function (index, value) {
         var li = "<li>"
         li += value
-        li += "<br><code>"
+        <!-- li += "<br><small>Paste this code in your page - </small><br><code>"
         li += '&lt;div style="position: absolute; width: 0%; height: 0%; display: none;" id="LiveOrNot" data-secret="'
         li += btoa(value).replace("=","")
         li += '"&gt;&lt;/div&gt;'
-        li += "</code></li>"
+        li += "</code>" -->
+        li += "</li>"
         $("#Domains").append(li)
       });
     })

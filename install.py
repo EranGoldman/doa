@@ -1,7 +1,6 @@
 from os import remove
 from sys import argv
 import sqlite3
-from modules import db
 import string
 from random import *
 import hashlib
@@ -39,13 +38,13 @@ hash = hashlib.sha512()
 hash.update(('%s' % adminPass).encode('utf-8'))
 adminPass = hash.hexdigest()
 
-quary = "INSERT INTO zx_users (EMAIL,PASSWORD,ROLE) "
-quary += "VALUES ('"
-quary += adminUser
-quary += "','"
-quary += adminPass
-quary += "','admin');"
-conn.execute(quary)
+query = "INSERT INTO zx_users (EMAIL,PASSWORD,ROLE) "
+query += "VALUES ('"
+query += adminUser
+query += "','"
+query += adminPass
+query += "','admin');"
+conn.execute(query)
 conn.commit()
 
 conn.close()
