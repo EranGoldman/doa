@@ -43,9 +43,18 @@
     })
     $.get('domain',function(data){
       $.each(data.domains, function (index, value) {
-        $("#Domains").append("<li>"+value+"</li>")
+        var li = "<li>"
+        li += value
+        li += "<br><code>"
+        li += '&lt;div style="position: absolute; width: 0%; height: 0%; display: none;" id="LiveOrNot" data-secret="'
+        li += btoa(value).replace("=","")
+        li += '"&gt;&lt;/div&gt;'
+        li += "</code></li>"
+        $("#Domains").append(li)
       });
     })
+
+
   })
 </script>
 {% endblock %}

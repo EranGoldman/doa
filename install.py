@@ -45,7 +45,6 @@ quary += adminUser
 quary += "','"
 quary += adminPass
 quary += "','admin');"
-print(quary)
 conn.execute(quary)
 conn.commit()
 
