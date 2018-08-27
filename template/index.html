@@ -20,7 +20,7 @@
            <code>var elemDiv = document.createElement('div');
 elemDiv.style.cssText = 'position:absolute;width:0%;height:0%;display: none;';
 elemDiv.setAttribute("id","LiveOrNot");
-elemDiv.setAttribute("data-secret",btoa(window.location.href).replace("=","");
+elemDiv.setAttribute("data-secret",btoa(window.location.href).replace("=","").replace("=","");
 elemDiv.innerHTML = (new Date).getTime();
 document.body.appendChild(elemDiv);
 </code>

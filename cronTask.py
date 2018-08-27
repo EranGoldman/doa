@@ -32,11 +32,11 @@ import base64
 conn = sqlite3.connect('db/database.db')
 driver = webdriver.Firefox(executable_path='/opt/geckodriver')
 regex = re.compile(
-        r'^(?:http|ftp)s?://' # http:// or https://
-        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
-        r'localhost|' #localhost...
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
-        r'(?::\d+)?' # optional port
+        r'^(?:http|ftp)s?://'  # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+        r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
 query = "select * from domains;"
@@ -53,6 +53,11 @@ for row in result:
         try:
             element = driver.find_element_by_id('LiveOrNot')
             secret = element.get_attribute("data-secret")
+            lenDiff = len(url) - len(driver.current_url)
+            if (lenDiff == 1):
+                url = url[:-1]
+            elif(lenDiff == -1):
+                url += '/'
             calc = (base64.b64encode(str.encode(url))).decode("utf-8").replace("=", "")
             if secret == calc:
                 print(url, "is alive and tag in place")
