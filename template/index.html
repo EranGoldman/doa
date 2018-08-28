@@ -4,6 +4,14 @@
 <div class="row marketing top15">
 <div class="col-lg-6 top15">
  <h4>Your domains</h4>
+ <small> Add the script to your website:</small>
+ <code>var elemDiv = document.createElement('div');
+elemDiv.style.cssText = 'position:absolute;width:0%;height:0%;display: none;';
+elemDiv.setAttribute("id","LiveOrNot");
+elemDiv.setAttribute("data-secret",btoa(window.location.href).replace("=","").replace("=","");
+elemDiv.innerHTML = (new Date).getTime();
+document.body.appendChild(elemDiv);
+</code>
   <ul id="Domains">
   </ul>
 </div>
@@ -16,14 +24,6 @@
        </div>
        <div class="form-group">
            <label for="domain">Domain:</label>
-           <small> Add the script to your website:</small>
-           <code>var elemDiv = document.createElement('div');
-elemDiv.style.cssText = 'position:absolute;width:0%;height:0%;display: none;';
-elemDiv.setAttribute("id","LiveOrNot");
-elemDiv.setAttribute("data-secret",btoa(window.location.href).replace("=","").replace("=","");
-elemDiv.innerHTML = (new Date).getTime();
-document.body.appendChild(elemDiv);
-</code>
            <input type="text" class="form-control" id="domain" name="domain">
        </div>
      <button id="btnAddDomain" type="submit" class="btn btn-primary">Submit</button>
