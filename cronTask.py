@@ -11,6 +11,8 @@ from random import *
 import hashlib
 import re
 import base64
+import requests
+
 
 #TODO: Add unittest support
 # import unittest
@@ -30,6 +32,11 @@ import base64
 #
 
 conn = sqlite3.connect('db/database.db')
+mg_query = 'select * from mailgunCred;'
+result = conn.execute(query)
+mailgunurl = result[0][0]
+mailgunapi = result[0][1]
+
 driver = webdriver.Firefox(executable_path='/opt/geckodriver')
 regex = re.compile(
         r'^(?:http|ftp)s?://'  # http:// or https://
@@ -44,6 +51,7 @@ result = conn.execute(query)
 
 for row in result:
     url = row[1]
+    useremail = row[2]
     if re.match(regex, url):
         driver.get(url)
         driver.implicitly_wait(10)
@@ -62,6 +70,18 @@ for row in result:
             if secret == calc:
                 print(url, "is alive and tag in place")
             else:
+                message = 'The tag for ' + url + 'is wrong\n'
+                message += 'Tag : ' + secret + '\n'
+                message += 'Should be : ' + calc + '\n'
+                message += 'checked url : ' + driver.current_url
+                files = {
+                    'from': 'Dead or Alive <doa@gilgoldman.comE>',
+                    'to': useremail,
+                    'subject': '[DOA - ' + url + '] - Tag error',
+                    'text': message
+                }
+
+                response = requests.post(mailgunurl, files=files, auth=('api', mailgunapi))
                 print(url, "is alive and tag is wrong")
         except NoSuchElementException:
             print(url, "is accessable but DOL tag is missing")

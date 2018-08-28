@@ -47,6 +47,17 @@ query += "','admin');"
 conn.execute(query)
 conn.commit()
 
+useMailgun = input("Do you want to use mailgun (N) ?")
+if (useMailgun == 'Y' or useMailgun == 'y' or useMailgun.lower() == 'yes'):
+    mailgunurl = input("Your mailgun domain : ")
+    mailgunapi = input("Your mailgun api : ")
+    query = "INSERT INTO mailgunCred (domain, apikey) "
+    query += "VALUES ('https://api.mailgun.net/v2/"
+    query += mailgunurl
+    query += "/messages','" + mailgunapi + "')"
+    conn.execute(query)
+    conn.commit()
+
 conn.close()
 print('It is a good practice to delete the installation script.')
 deleteSelf = input('Do you agree (Y) ? ')
