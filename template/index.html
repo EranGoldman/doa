@@ -44,15 +44,11 @@ document.body.appendChild(elemDiv);
                 $("#frmDomain").append('<div id="error" class="alert alert-warning top15">'+data.error+'</div>')
                 $(".alert").delay(2500).fadeOut(1600)
               }else{
-                $("#frmDomain").append('<div id="error" class="alert alert-success top15">Done</div>')
-                <!-- var li = "<li>"
+                var li = "<li>"
                 li += domain
-                li += "<br><small>Paste this code in your page - </small><br><code>"
-                li += '&lt;div style="position: absolute; width: 0%; height: 0%; display: none;" id="LiveOrNot" data-secret="'
-                li += btoa(domain).replace("=","")
-                li += '"&gt;&lt;/div&gt;'
-                li += "</code></li>"
-                $("#Domains").append(li) -->
+                li += "</li>"
+                $("#Domains").append(li)
+                $("#frmDomain").append('<div id="error" class="alert alert-success top15">Done</div>')
                 $(".alert").delay(2500).fadeOut(1600)
               }
             })
@@ -61,11 +57,6 @@ document.body.appendChild(elemDiv);
       $.each(data.domains, function (index, value) {
         var li = "<li>"
         li += value
-        <!-- li += "<br><small>Paste this code in your page - </small><br><code>"
-        li += '&lt;div style="position: absolute; width: 0%; height: 0%; display: none;" id="LiveOrNot" data-secret="'
-        li += btoa(value).replace("=","")
-        li += '"&gt;&lt;/div&gt;'
-        li += "</code>" -->
         li += "</li>"
         $("#Domains").append(li)
       });
